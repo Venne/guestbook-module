@@ -1,0 +1,39 @@
+{
+	"name": "venne/guestbook-module",
+	"description": "Guestbook module",
+	"keywords": ["cms", "nette", "venne", "module"],
+	"version": "2.0.0",
+	"authors": [
+		{
+			"name": "Josef Kříž",
+			"homepage": "http://josef-kriz.cz"
+		}
+	],
+	"require": {
+		"php": ">=5.3.2",
+		"venne/cms-module": "2.0.x-dev"
+	},
+	"autoload": {
+		"psr-0": {
+			"GuestbookModule": ""
+		}
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "2.0.x-dev"
+		},
+		"venne": {
+			"installers": ["DoctrineModule\\Module\\Installers\\DoctrineInstaller"],
+			"configuration": {
+				"includes": [
+					"%modules.guestbook.path%/Resources/config/config.neon"
+				],
+				"translator": {
+					"dictionaries": [
+						"%modules.guestbook.path%/Resources/translations"
+					]
+				}
+			}
+		}
+	}
+}

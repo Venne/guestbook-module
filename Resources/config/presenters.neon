@@ -1,0 +1,5 @@
+services:
+
+    guestbook.defaultPresenter:
+        class: GuestbookModule\Presenters\DefaultPresenter(@guestbook.commentRepository)
+        tags: [presenter]
