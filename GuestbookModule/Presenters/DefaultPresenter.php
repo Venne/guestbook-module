@@ -12,11 +12,10 @@
 namespace GuestbookModule\Presenters;
 
 use GuestbookModule\Forms\CommentFrontFormFactory;
+use GuestbookModule\Repositories\CommentRepository;
 use Nette\Application\ForbiddenRequestException;
 use Nette\DateTime;
 use Nette\Forms\Form;
-use Venne;
-use DoctrineModule\Repositories\BaseRepository;
 
 /**
  * @author Josef Kříž <pepakriz@gmail.com>
@@ -27,17 +26,18 @@ class DefaultPresenter extends \CmsModule\Content\Presenters\PagePresenter
 	/** @persistent */
 	public $key;
 
-	/** @var BaseRepository */
+	/** @var CommentRepository */
 	protected $commentRepository;
 
 	/** @var CommentFrontFormFactory */
 	protected $commentFormFactory;
 
 
-	public function __construct(BaseRepository $commentRepository)
+	/**
+	 * @param \GuestbookModule\Repositories\CommentRepository $commentRepository
+	 */
+	public function injectCommentRepository(CommentRepository $commentRepository)
 	{
-		parent::__construct();
-
 		$this->commentRepository = $commentRepository;
 	}
 
@@ -61,7 +61,7 @@ class DefaultPresenter extends \CmsModule\Content\Presenters\PagePresenter
 		}
 
 		if ($this->isLoggedInAsSuperadmin()) {
-			$this->flashMessage('You are logged in as superadmin. You can not send new comments.', 'info', true);
+			$this->flashMessage('You are logged in as superadmin. You can not send new comments.', 'info', TRUE);
 		}
 	}
 

@@ -11,10 +11,9 @@
 
 namespace GuestbookModule\Components;
 
-use Venne;
+use GuestbookModule\Repositories\CommentRepository;
 use CmsModule\Content\SectionControl;
 use GuestbookModule\Forms\CommentFormFactory;
-use DoctrineModule\Repositories\BaseRepository;
 
 /**
  * @author Josef Kříž <pepakriz@gmail.com>
@@ -22,7 +21,7 @@ use DoctrineModule\Repositories\BaseRepository;
 class TableControl extends SectionControl
 {
 
-	/** @var BaseRepository */
+	/** @var CommentRepository */
 	protected $commentRepository;
 
 	/** @var CommentFormFactory */
@@ -30,10 +29,10 @@ class TableControl extends SectionControl
 
 
 	/**
-	 * @param \DoctrineModule\Repositories\BaseRepository $commentRepository
-	 * @param \BlogModule\Forms\CommentFormFactory $commentFormFactory
+	 * @param \GuestbookModule\Repositories\CommentRepository $commentRepository
+	 * @param \GuestbookModule\Forms\CommentFormFactory $commentFormFactory
 	 */
-	public function __construct(BaseRepository $commentRepository, CommentFormFactory $commentFormFactory)
+	public function __construct(CommentRepository $commentRepository, CommentFormFactory $commentFormFactory)
 	{
 		parent::__construct();
 

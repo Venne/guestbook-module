@@ -8,8 +8,9 @@ services:
 		tags: [contentType: [name: 'guestbook']]
 
 	guestbook.commentRepository:
-		class: GuestbookModule\Entities\CommentEntity
-		tags: [repository]
+		class: GuestbookModule\Repositories\CommentRepository
+		factory: @entityManager::getRepository('GuestbookModule\Entities\CommentEntity')
+		tags: [proxy: DoctrineModule\Repositories\BaseRepository]
 
 includes:
 	- presenters.neon

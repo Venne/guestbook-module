@@ -17,5 +17,5 @@ services:
 
 factories:
 	guestbook.tableControl:
-		class: GuestbookModule\Components\TableControl(@guestbook.commentRepository)
+		class: GuestbookModule\Components\TableControl
 		tags: [component]

@@ -17,7 +17,7 @@ use CmsModule\Security\Entities\UserEntity;
 
 /**
  * @author Josef Kříž <pepakriz@gmail.com>
- * @ORM\Entity(repositoryClass="\DoctrineModule\Repositories\BaseRepository")
+ * @ORM\Entity(repositoryClass="\GuestbookModule\Repositories\CommentRepository")
  * @ORM\Table(name="guestbook_comment")
  */
 class CommentEntity extends \DoctrineModule\Entities\IdentifiedEntity
