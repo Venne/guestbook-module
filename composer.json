@@ -25,13 +25,8 @@
 		"venne": {
 			"installers": ["DoctrineModule\\Module\\Installers\\DoctrineInstaller"],
 			"configuration": {
-				"includes": [
-					"%modules.guestbook.path%/Resources/config/config.neon"
-				],
-				"translator": {
-					"dictionaries": [
-						"%modules.guestbook.path%/Resources/translations"
-					]
+				"extensions": {
+					"guestbook": "GuestbookModule\\DI\\GuestbookExtension"
 				}
 			}
 		}

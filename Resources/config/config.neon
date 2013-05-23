@@ -1,5 +1,9 @@
 services:
 
+	translator.translator:
+		setup:
+			- '$service->addDictionary(new TranslatorModule\Dictionary(?))'(%modules.guestbook.path%/Resources/translations)
+
 	guestbook.guestbookContent:
 		class: CmsModule\Content\ContentType('GuestbookModule\Entities\PageEntity')
 		setup:
