@@ -9,13 +9,12 @@
  * the file license.txt that was distributed with this source code.
  */
 
-namespace GuestbookModule\Forms;
+namespace GuestbookModule\Pages\Guestbook;
 
-use Venne;
-use Venne\Forms\Form;
-use Nette\Security\User;
 use DoctrineModule\Forms\FormFactory;
 use DoctrineModule\Forms\Mappers\EntityMapper;
+use Nette\Security\User;
+use Venne\Forms\Form;
 
 /**
  * @author Josef Kříž <pepakriz@gmail.com>
@@ -53,12 +52,15 @@ class CommentFrontFormFactory extends FormFactory
 	public function configure(Form $form)
 	{
 		$form->addProtection();
+		$form->addAntispam();
 
 		if (!$this->user->isLoggedIn()) {
 			$form->addText('author', 'Name')->setRequired();
 		}
 
-		$form->addTextArea('text', 'Text')->setRequired(TRUE);
+		$form->addTextArea('text', 'Text')
+			->setRequired(TRUE)
+			->getControlPrototype()->class[] = 'input-block-level';
 
 		$form->addSaveButton('Save');
 	}
@@ -67,7 +69,7 @@ class CommentFrontFormFactory extends FormFactory
 	public function handleSave(Form $form)
 	{
 		if ($this->user->isLoggedIn()) {
-			$form->data->author = $this->mapper->getEntityManager()->getRepository('CmsModule\Security\Entities\UserEntity')->findOneBy(array('email' => $this->user->identity->getId()));
+			$form->data->route->author = $this->user->identity;
 		} else {
 			$form->data->author = $form['author']->getValue();
 		}

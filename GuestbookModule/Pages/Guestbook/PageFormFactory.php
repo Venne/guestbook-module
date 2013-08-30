@@ -9,9 +9,8 @@
  * the file license.txt that was distributed with this source code.
  */
 
-namespace GuestbookModule\Forms;
+namespace GuestbookModule\Pages\Guestbook;
 
-use Venne;
 use Venne\Forms\Form;
 use DoctrineModule\Forms\FormFactory;
 
@@ -29,6 +28,8 @@ class PageFormFactory extends FormFactory
 	{
 		$form->addGroup('Settings');
 		$form->addText('itemsPerPage', 'Items per page');
+		$form->addText('messageMaxLength', 'Message max length')
+			->addCondition($form::FILLED)->addRule($form::NUMERIC);
 
 		$form->addGroup();
 		$form->addSaveButton('Save');

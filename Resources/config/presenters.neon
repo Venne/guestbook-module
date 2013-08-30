@@ -1,5 +1,0 @@
-factories:
-
-    guestbook.defaultPresenter:
-        class: GuestbookModule\Presenters\DefaultPresenter
-        tags: [presenter]

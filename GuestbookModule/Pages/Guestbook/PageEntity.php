@@ -9,19 +9,26 @@
  * the file license.txt that was distributed with this source code.
  */
 
-namespace GuestbookModule\Entities;
+namespace GuestbookModule\Pages\Guestbook;
 
-use Venne;
+use CmsModule\Content\Entities\ExtendedPageEntity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @author Josef Kříž <pepakriz@gmail.com>
  * @ORM\Entity(repositoryClass="\CmsModule\Content\Repositories\PageRepository")
- * @ORM\Table(name="guestbook_page")
- * @ORM\DiscriminatorEntry(name="guestbookPage")
+ * @ORM\Table(name="guestbookPage")
  */
-class PageEntity extends \CmsModule\Content\Entities\PageEntity
+class PageEntity extends ExtendedPageEntity
 {
+
+	const PRIVILEGE_EDIT_OWN = 'edit_own';
+
+	const PRIVILEGE_EDIT = 'edit';
+
+	const PRIVILEGE_DELETE_OWN = 'delete_own';
+
+	const PRIVILEGE_DELETE = 'delete';
 
 	/**
 	 * @var ArrayCollection|CommentEntity[]
@@ -35,13 +42,11 @@ class PageEntity extends \CmsModule\Content\Entities\PageEntity
 	 */
 	protected $itemsPerPage = 10;
 
-
-	public function __construct()
-	{
-		parent::__construct();
-
-		$this->mainRoute->type = 'Guestbook:Default:default';
-	}
+	/**
+	 * @var int
+	 * @ORM\Column(type="integer")
+	 */
+	protected $messageMaxLength;
 
 
 	/**
@@ -77,5 +82,34 @@ class PageEntity extends \CmsModule\Content\Entities\PageEntity
 	public function getItemsPerPage()
 	{
 		return $this->itemsPerPage;
+	}
+
+
+	/**
+	 * @param int $messageMaxLength
+	 */
+	public function setMessageMaxLength($messageMaxLength)
+	{
+		$this->messageMaxLength = $messageMaxLength ? : NULL;
+	}
+
+
+	/**
+	 * @return int
+	 */
+	public function getMessageMaxLength()
+	{
+		return $this->messageMaxLength;
+	}
+
+
+	public function getPrivileges()
+	{
+		return parent::getPrivileges() + array(
+			self::PRIVILEGE_EDIT_OWN => 'edit own comments',
+			self::PRIVILEGE_DELETE_OWN => 'delete own comments',
+			self::PRIVILEGE_EDIT => 'edit comments from all authors',
+			self::PRIVILEGE_DELETE => 'delete comments from all authors',
+		);
 	}
 }

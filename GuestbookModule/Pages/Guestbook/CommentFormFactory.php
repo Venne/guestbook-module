@@ -9,11 +9,9 @@
  * the file license.txt that was distributed with this source code.
  */
 
-namespace GuestbookModule\Forms;
+namespace GuestbookModule\Pages\Guestbook;
 
-use Venne;
 use Venne\Forms\Form;
-use Nette\Security\User;
 use DoctrineModule\Forms\FormFactory;
 
 /**
@@ -36,12 +34,15 @@ class CommentFormFactory extends FormFactory
 	 */
 	public function configure(Form $form)
 	{
-		$form->addGroup();
-		$form->addDateTime('created', 'Created');
+		$route = $form->addOne('route');
 
-		$form->addGroup('Author');
-		$authorName = $form->addText('authorName', 'Name');
-		$author = $form->addManyToOne('author', 'Author');
+		$form->addGroup();
+		$form->addManyToOne('parent', 'Parent');
+
+		$group = $form->addGroup('Author');
+		$authorName = $form->addText('author', 'Name');
+		$route->setCurrentGroup($group);
+		$author = $route->addManyToOne('author', 'Author');
 
 		$authorName
 			->addConditionOn($author, $form::FILLED)

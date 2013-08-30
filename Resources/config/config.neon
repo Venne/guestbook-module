@@ -4,18 +4,5 @@ services:
 		setup:
 			- '$service->addDictionary(new TranslatorModule\Dictionary(?))'(%modules.guestbook.path%/Resources/translations)
 
-	guestbook.guestbookContent:
-		class: CmsModule\Content\ContentType('GuestbookModule\Entities\PageEntity')
-		setup:
-			- addSection('Content', @guestbook.tableControlFactory)
-			- addSection('Settings', @guestbook.pageFormFactory)
-		tags: [contentType: [name: 'guestbook']]
-
-	guestbook.commentRepository:
-		class: GuestbookModule\Repositories\CommentRepository
-		factory: @entityManager::getRepository('GuestbookModule\Entities\CommentEntity')
-		tags: [proxy: DoctrineModule\Repositories\BaseRepository]
-
 includes:
-	- presenters.neon
-	- components.neon
+	- pages.guestbook.neon
