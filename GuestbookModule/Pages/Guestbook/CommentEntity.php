@@ -18,7 +18,7 @@ use Nette\Utils\Strings;
 /**
  * @author Josef Kříž <pepakriz@gmail.com>
  * @ORM\Entity(repositoryClass="\GuestbookModule\Pages\Guestbook\CommentRepository")
- * @ORM\Table(name="guestbookComment")
+ * @ORM\Table(name="guestbook_comment")
  */
 class CommentEntity extends ExtendedRouteEntity
 {
