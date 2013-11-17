@@ -43,16 +43,16 @@ class TableControl extends SectionControl
 
 	protected function createComponentTable()
 	{
-		$adminControl = new RouteItemsControl($this->commentRepository, $this->getEntity());
+		$adminControl = new RouteItemsControl($this->commentRepository, $this->getExtendedPage());
 		$admin = $adminControl->getTable();
 		$table = $admin->getTable();
 		$table->setModel(new Doctrine($this->commentRepository->createQueryBuilder('a')
 				->andWhere('a.extendedPage = :page')
-				->setParameter('page', $this->entity->id)
+				->setParameter('page', $this->extendedPage->id)
 		));
 
 		$repository = $this->commentRepository;
-		$entity = $this->entity;
+		$entity = $this->extendedPage;
 		$form = $admin->createForm($this->commentFormFactory, 'Comment', function () use ($repository, $entity) {
 			return $repository->createNew(array($entity));
 		}, \CmsModule\Components\Table\Form::TYPE_FULL);
