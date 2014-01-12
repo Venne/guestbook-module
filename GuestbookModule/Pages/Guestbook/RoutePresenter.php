@@ -94,7 +94,7 @@ class RoutePresenter extends ItemsPresenter
 
 		$this->getRepository()->delete($entity);
 
-		$this->flashMessage('Message has been deleted.', 'success');
+		$this->flashMessage($this->translator->translate('Message has been deleted.'), 'success');
 		$this->redirect('this', array('id' => NULL));
 	}
 
@@ -102,7 +102,7 @@ class RoutePresenter extends ItemsPresenter
 	public function actionDefault()
 	{
 		if ($this->isLoggedInAsSuperadmin()) {
-			$this->flashMessage('You are logged in as superadmin. You can not send new comments.', 'info', TRUE);
+			$this->flashMessage($this->translator->translate('You are logged in as superadmin. You can not send new comments.'), 'info', TRUE);
 		}
 	}
 
@@ -131,7 +131,7 @@ class RoutePresenter extends ItemsPresenter
 
 	public function formSuccess()
 	{
-		$this->flashMessage('Message has been saved.', 'success');
+		$this->flashMessage($this->translator->translate('Message has been saved.'), 'success');
 		$this->redirect('this', array('id' => NULL));
 	}
 
