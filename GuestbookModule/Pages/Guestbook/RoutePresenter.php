@@ -88,7 +88,7 @@ class RoutePresenter extends ItemsPresenter
 			throw new BadRequestException;
 		}
 
-		if (!$entity->route->author || !$this->user->isLoggedIn() || $entity->route->author->id !== $this->user->identity->id) {
+		if (!$entity->route->author && !$this->user->isLoggedIn() && $entity->route->author->id !== $this->user->identity->id) {
 			throw new ForbiddenRequestException;
 		}
 
